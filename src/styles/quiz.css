@@ -1,0 +1,111 @@
+/* ============================================================
+   quiz.css  —  🎬 Quiz tab
+   Ornate quiz card, step progress bar + dot indicators,
+   genre selection grid, single-choice buttons, error message.
+   ============================================================ */
+
+/* ── Quiz card container ───────────────────────────────────── */
+.quiz-card {
+  background:    linear-gradient(135deg, var(--ink-2), var(--ink-1));
+  border:        1px solid var(--gold-d);
+  border-radius: 10px;
+  padding:       30px 32px;
+  position:      relative;
+  margin-bottom: 18px;
+}
+
+/* Corner ornaments */
+.quiz-card::before { content: '✦'; position: absolute; top: 12px;    left:  14px; color: var(--gold-d); font-size: 13px; }
+.quiz-card::after  { content: '✦'; position: absolute; bottom: 12px; right: 14px; color: var(--gold-d); font-size: 13px; }
+
+.quiz-step {
+  font-size:   9px; letter-spacing: 5px; text-transform: uppercase;
+  color:       var(--gold-d); margin-bottom: 10px;
+}
+.quiz-q {
+  font-family: 'Playfair Display', serif;
+  font-size:   clamp(16px,3vw,22px); font-style: italic;
+  color:       var(--cream); margin-bottom: 6px; line-height: 1.4;
+}
+.quiz-hint { font-size: 13px; color: var(--silver); margin-bottom: 20px; }
+
+/* ── Step progress bar ─────────────────────────────────────── */
+.prog-wrap {
+  height:        3px;
+  background:    var(--ink-2);
+  margin-bottom: 24px;
+  border-radius: 2px;
+  overflow:      visible;
+}
+.prog-fill {
+  height:        100%; border-radius: 2px;
+  background:    linear-gradient(90deg, var(--ruby), var(--gold), var(--teal));
+  transition:    width .5s ease;
+  position:      relative;
+}
+
+/* Arrowhead at the leading edge of the bar */
+.prog-fill::after {
+  content:      '';
+  position:     absolute; right: -2px; top: -4px;
+  width:        7px; height: 10px;
+  background:   var(--gold-l);
+  clip-path:    polygon(0 0, 100% 50%, 0 100%);
+}
+
+/* ── Step dots ─────────────────────────────────────────────── */
+.prog-dots {
+  display:       flex; justify-content: center; gap: 8px;
+  margin-bottom: 18px;
+}
+.prog-dot {
+  width:         8px; height: 8px; border-radius: 50%;
+  background:    var(--ink-3);
+  border:        1px solid var(--gold-d);
+  transition:    all .3s;
+}
+.prog-dot.done   { background: var(--gold-d); }
+.prog-dot.active { background: var(--gold); box-shadow: 0 0 7px var(--gold); }
+
+/* ── Genre selection grid ──────────────────────────────────── */
+.genre-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px,1fr));
+  gap: 8px; margin-bottom: 20px;
+}
+.g-btn {
+  background:  rgba(201,168,76,.05);
+  border:      1px solid rgba(122,99,48,.55);
+  color:       var(--cream-d);
+  font-family: 'Cormorant Garamond', serif; font-size: 14px;
+  padding:     10px 8px; text-align: center; cursor: pointer;
+  border-radius: 6px;
+  transition:  all var(--trans);
+  display:     flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.g-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,.12); }
+.g-btn.sel   { border-color: var(--gold); background: rgba(201,168,76,.18); color: var(--gold); box-shadow: 0 0 10px rgba(201,168,76,.15); }
+
+/* ── Single-choice row buttons ─────────────────────────────── */
+.choice-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+.c-btn {
+  flex:        1; min-width: 120px;
+  background:  rgba(201,168,76,.05);
+  border:      1px solid rgba(122,99,48,.55);
+  color:       var(--cream-d);
+  font-family: 'Cormorant Garamond', serif; font-size: 15px;
+  padding:     11px 14px; cursor: pointer; text-align: center;
+  border-radius: 6px;
+  transition:  all var(--trans);
+}
+.c-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,.1); }
+.c-btn.sel   { border-color: var(--gold); background: rgba(201,168,76,.18); color: var(--gold); }
+
+/* ── Validation error message ──────────────────────────────── */
+.err-msg { font-size: 12px; color: var(--ruby); font-style: italic; margin-bottom: 10px; }
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 520px) {
+  .quiz-card  { padding: 22px 16px; }
+  .genre-grid { grid-template-columns: repeat(2,1fr); }
+}

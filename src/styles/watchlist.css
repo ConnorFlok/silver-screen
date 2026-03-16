@@ -1,0 +1,36 @@
+/* ============================================================
+   watchlist.css  —  ★ My Marquee (Watchlist) tab
+   Watchlist movie rows, thumbnail, info, action buttons,
+   five-star rating widget.
+   ============================================================ */
+
+/* ── Watchlist movie row ───────────────────────────────────── */
+.wl-movie-row {
+  display:       flex; gap: 12px;
+  padding:       12px 14px;
+  background:    var(--ink-1);
+  border:        1px solid var(--ink-3);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  align-items:   flex-start;
+}
+
+/* Thumbnail */
+.wl-thumb     { width: 44px; height: 60px; border-radius: 5px; flex-shrink: 0; overflow: hidden; border: 1px solid var(--gold-d); }
+.wl-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Info column */
+.wl-info  { flex: 1; min-width: 0; }
+.wl-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: var(--cream); margin-bottom: 3px; }
+.wl-meta  { font-size: 11px; color: var(--silver); }
+
+/* Action column */
+.wl-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.wl-remove       { color: var(--silver); font-size: 14px; padding: 4px 6px; transition: color var(--trans); }
+.wl-remove:hover { color: var(--ruby); }
+
+/* ── Star rating widget ────────────────────────────────────── */
+.star-rating { display: flex; align-items: center; gap: 3px; margin-top: 5px; }
+.sr-star         { color: var(--silver); font-size: 16px; cursor: pointer; transition: color .15s, transform .1s; }
+.sr-star.lit     { color: var(--gold); }
+.sr-star:hover   { transform: scale(1.2); }

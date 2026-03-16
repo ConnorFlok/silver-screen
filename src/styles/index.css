@@ -1,0 +1,34 @@
+/* ============================================================
+   index.css  —  Style entry point
+   Imports all CSS files in dependency order.
+   This is the only file imported by App.jsx.
+
+   Debugging guide
+   ──────────────────────────────────────────────────────────
+   base.css       tokens, reset, root shell, curtain, keyframes
+   layout.css     brand bar, tab bar, panels, buttons, dividers
+   shared.css     movie rows, genre chips, detail view, why-tags
+   nowplaying.css marquee hero, sidebar, poster cards, carousel
+   search.css     search input, dropdown, trending grid
+   actors.css     actor hero, spotlight grid, portrait cards
+   quiz.css       quiz card, progress bar, genre grid, choices
+   random.css     random hero, filter chips, count stepper, toggle
+   watchlist.css  watchlist rows, star rating
+   ============================================================ */
+
+/* 1 ── Foundations (tokens, reset, animations) */
+@import './base.css';
+
+/* 2 ── Chrome (brand bar, tabs, content area, shared buttons) */
+@import './layout.css';
+
+/* 3 ── Cross-tab components (movie rows, detail view) */
+@import './shared.css';
+
+/* 4 ── Tab-specific styles */
+@import './nowplaying.css';
+@import './search.css';
+@import './actors.css';
+@import './quiz.css';
+@import './random.css';
+@import './watchlist.css';

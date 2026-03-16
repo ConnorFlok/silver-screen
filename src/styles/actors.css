@@ -1,0 +1,77 @@
+/* ============================================================
+   actors.css  —  🎭 Actors tab
+   Search hero, trending actor spotlight grid, portrait cards,
+   actor detail header with large portrait.
+   ============================================================ */
+
+/* ── Search hero strip ─────────────────────────────────────── */
+.actor-search-hero {
+  background:    linear-gradient(135deg, var(--navy), var(--velvet));
+  border:        1px solid var(--gold-d);
+  border-radius: 10px;
+  padding:       20px 22px;
+  margin-bottom: 22px;
+  text-align:    center;
+}
+.actor-search-hero h2 {
+  font-family: 'Pacifico', cursive;
+  font-size:   20px; color: var(--cream);
+  margin-bottom: 4px;
+  text-shadow: 0 0 16px rgba(255,61,154,.3);
+}
+.actor-search-hero p {
+  font-family: 'IM Fell English', serif;
+  font-style:  italic; font-size: 14px; color: var(--silver-l);
+}
+
+/* ── Spotlight grid ────────────────────────────────────────── */
+.trending-actor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px,1fr));
+  gap: 12px;
+}
+
+/* Individual portrait card */
+.tag-card {
+  position:      relative; cursor: pointer;
+  border-radius: 10px; overflow: hidden;
+  border:        1px solid rgba(201,168,76,.25);
+  background:    var(--ink-1);
+  transition:    transform .22s, border-color .22s, box-shadow .22s;
+  text-align:    center;
+}
+.tag-card:hover {
+  transform:   translateY(-4px);
+  border-color: var(--gold);
+  box-shadow:  0 12px 32px rgba(0,0,0,.5), 0 0 14px rgba(201,168,76,.18);
+}
+.tag-portrait {
+  width:               100%; height: 110px;
+  background-size:     cover;
+  background-position: top center;
+}
+.tag-info    { padding: 8px 8px 10px; }
+.tag-name    { font-family: 'Playfair Display', serif; font-size: 12px; font-weight: 700; color: var(--cream); line-height: 1.2; margin-bottom: 2px; }
+.tag-films   { font-size: 9px; color: var(--silver); font-style: italic; }
+
+/* ── Actor detail header ───────────────────────────────────── */
+.actor-detail-header {
+  display:       flex; gap: 18px; align-items: flex-start;
+  margin-bottom: 24px; padding: 20px;
+  background:    linear-gradient(135deg, var(--ink-2), var(--ink-1));
+  border:        1px solid var(--gold-d);
+  border-radius: 10px;
+}
+.actor-portrait-large {
+  width:         90px; height: 120px;
+  border-radius: 8px; flex-shrink: 0;
+  overflow:      hidden;
+  border:        2px solid var(--gold-d);
+  box-shadow:    0 8px 24px rgba(0,0,0,.4);
+}
+.actor-portrait-large img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 520px) {
+  .trending-actor-grid { grid-template-columns: repeat(2,1fr); }
+}

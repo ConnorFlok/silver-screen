@@ -1,0 +1,165 @@
+/* ============================================================
+   base.css
+   Design tokens, CSS reset, root shell, curtain intro,
+   film grain, global keyframe animations.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;0,700&family=IM+Fell+English:ital@0;1&family=Pacifico&display=swap');
+
+/* ── Design tokens ─────────────────────────────────────────── */
+:root {
+  /* Gold palette */
+  --gold: #c9a84c;  --gold-l: #e8c97a;  --gold-d: #7a6330;
+  --gold-faint: rgba(201,168,76,.09);
+
+  /* Neutrals */
+  --cream: #f7f0da;  --cream-d: #e4d9b8;
+  --ink:   #0e0905;  --ink-1:   #1a1208;  --ink-2: #28200f;  --ink-3: #3a2e1a;
+  --silver: #9e9282; --silver-l: #c0b8a8;
+
+  /* Jewel accents */
+  --ruby:   #d4274a;  --ruby-d:   #8b1a1a;  --ruby-faint:   rgba(212,39,74,.12);
+  --teal:   #17b8b8;  --teal-d:   #0d7a7a;  --teal-faint:   rgba(23,184,184,.12);
+  --cobalt: #2d59ff;  --cobalt-d: #1a35a0;
+  --pink:   #ff3d9a;  --orchid:   #b44cff;   --lime: #8fdb2a;
+
+  /* Atmosphere */
+  --velvet: #3d0010;  /* deep red velvet */
+  --navy:   #06102e;  /* midnight navy  */
+
+  /* Layout */
+  --tab-h: 54px;
+  --hdr-h: 54px;
+  --trans: .22s ease;
+  --r:     12px;
+}
+
+/* ── CSS reset ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body              { height: 100%; overflow: hidden; }
+body {
+  background:  var(--ink);
+  color:       var(--cream);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  display:     flex;
+  flex-direction: column;
+}
+button { cursor: pointer; font-family: inherit; border: none; background: none; }
+input  { font-family: inherit; }
+ul     { list-style: none; }
+
+/* ── Custom scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar       { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--ink-1); }
+::-webkit-scrollbar-thumb { background: var(--gold-d); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+/* ── Root shell ────────────────────────────────────────────── */
+.ssc-root {
+  display:        flex;
+  flex-direction: column;
+  height:         100vh;
+  overflow:       hidden;
+  position:       relative;
+}
+
+/* Ambient background gradients (velvet curtain texture) */
+.ssc-root::before {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse at 50% -8%,  rgba(255,61,154,.18),  transparent 52%),
+    radial-gradient(ellipse at 8%  30%,  rgba(23,184,184,.12),  transparent 44%),
+    radial-gradient(ellipse at 92% 32%,  rgba(45,89,255,.12),   transparent 46%),
+    radial-gradient(ellipse at 50% 100%, rgba(61,0,16,.6),      transparent 55%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(212,39,74,.08) 0 14px,
+      rgba(61,0,16,.12)  14px 26px
+    );
+}
+
+/* Film grain overlay */
+.ssc-root::after {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 9997;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  opacity: .38;
+  mix-blend-mode: overlay;
+}
+
+/* ── Curtain intro ─────────────────────────────────────────── */
+.curtain-overlay {
+  position:       fixed; inset: 0;
+  z-index:        9999;
+  display:        flex;
+  pointer-events: none;
+}
+.curtain {
+  flex: 1;
+  background:
+    linear-gradient(90deg,  rgba(255,255,255,.09), transparent 20%),
+    linear-gradient(180deg, rgba(0,0,0,.2),         transparent 32%),
+    repeating-linear-gradient(90deg, rgba(0,0,0,.2) 0 8px, rgba(255,255,255,.04) 8px 14px),
+    radial-gradient(circle at 30% 20%, rgba(212,39,74,.18), transparent 55%),
+    linear-gradient(180deg, var(--ruby-d), var(--velvet));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), 0 30px 80px rgba(0,0,0,.8);
+  transition:  transform 1.3s cubic-bezier(.22,.9,.18,1);
+}
+.curtain-left  { transform-origin: left  center; }
+.curtain-right { transform-origin: right center; }
+.curtain-open .curtain-left  { transform: translateX(-102%) skewX(-6deg); }
+.curtain-open .curtain-right { transform: translateX( 102%) skewX( 6deg); }
+
+.curtain-title {
+  position:    absolute; inset: 0;
+  display:     flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 8px; text-align: center;
+  transition:  opacity .55s ease .55s, transform .55s ease .55s;
+}
+.curtain-open .curtain-title { opacity: 0; transform: translateY(-8px); }
+
+.ct-top {
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: .35em; text-transform: uppercase;
+  color: rgba(245,238,216,.85); font-size: 13px;
+}
+.ct-script {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(30px,4vw,52px);
+  color: rgba(255,255,255,.95);
+  text-shadow: 0 0 16px rgba(255,61,154,.42), 0 0 38px rgba(45,89,255,.18);
+}
+.ct-sub {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: rgba(232,201,122,.92);
+  font-size: 16px;
+}
+
+/* ── Global keyframe animations ────────────────────────────── */
+@keyframes neonBar {
+  0%   { background-position: 0 0;    }
+  100% { background-position: 300% 0; }
+}
+@keyframes bulbs {
+  0%   { filter: brightness(.6);  }
+  50%  { filter: brightness(1.4); }
+  100% { filter: brightness(.7);  }
+}
+@keyframes ticker {
+  from { transform: translateX(100vw); }
+  to   { transform: translateX(-200%); }
+}
+@keyframes reelSpin {
+  0%   { transform: rotate(0);      }
+  50%  { transform: rotate(180deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes spin {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(360deg); }
+}
