@@ -1,4 +1,4 @@
-# CineScope Backend
+# Silver Screen Backend
 
 FastAPI server that loads the trained ML artifacts from the Jupyter notebook
 and serves TF-IDF cosine similarity + K-Means cluster recommendations.
