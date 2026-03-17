@@ -49,7 +49,7 @@ class CineScopeRecommender:
     Thread-safe for concurrent FastAPI requests (read-only after init).
     """
 
-    def __init__(self, artifacts_dir: str = "artifacts"):
+    def __init__(self, artifacts_dir: str = "backend/artifacts"):
         art = Path(artifacts_dir)
         if not art.exists():
             raise FileNotFoundError(
