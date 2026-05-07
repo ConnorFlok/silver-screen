@@ -62,8 +62,6 @@ You should see:
 ✅ Ready — 87,461 movies | 42,830 vocab terms | 7 clusters
 ```
 
-Visit http://localhost:8000/docs for the interactive API explorer.
-
 ### Step 3 — Start the frontend
 
 ```bash
