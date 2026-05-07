@@ -70,7 +70,7 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:5173. When the backend is running, movie detail pages
+When the backend is running, movie detail pages
 show a **✦ ML Model Active** badge and use real TF-IDF similarity scores.
 When the backend is offline the app falls back to local genre scoring
 automatically — nothing breaks.
